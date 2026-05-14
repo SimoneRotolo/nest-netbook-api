@@ -1,6 +1,5 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 
 // @Injectable() definisce la classe come un provider che può essere gestito dal sistema di Dependency Injection di NestJS.
 @Injectable()
@@ -11,13 +10,8 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    // Configura l'adattatore per SQLite utilizzando better-sqlite3.
-    const adapter = new PrismaBetterSqlite3({
-      url: 'file:./dev.db',
-    });
-    // Chiama il costruttore di PrismaClient passando l'adattatore e configurando i log per il debug.
+    // Chiama il costruttore di PrismaClient configurando i log per il debug.
     super({
-      adapter,
       log: ['query', 'info', 'warn', 'error'],
     });
   }
